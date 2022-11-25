@@ -6,6 +6,7 @@ import { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { setToken } from '../utils/handleToken'
+import LoadingSpinner from './LoadingSpinner'
 import '../style/components/form.css'
 
 // Validation du formulaire cf:
@@ -20,13 +21,16 @@ const Form = ({ userName }) => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
-  const { isLoading, isSuccess, rememberMe, token } = useSelector(
+  const { isLoading, isSuccess, rememberMe, token, isError } = useSelector(
     (state) => state.auth
   )
-
   useEffect(() => {
-    if (isSuccess) {
-      navigate('/profile')
+    try {
+      if (isSuccess) {
+        navigate('/profile')
+      }
+    } catch (error) {
+      navigate('/*')
     }
   }, [isSuccess, navigate])
 
@@ -34,13 +38,9 @@ const Form = ({ userName }) => {
     dispatch(isRememberMe(e.target.checked))
   }
 
-  const onSubmit = (datas) => {
+  const onSubmit = (datas, e) => {
     console.log('datas dans le Form', datas)
     dispatch(login(datas))
-    // dispatch({
-    //   type: 'auth/login',
-    //   payload: datas,
-    // })
   }
 
   if (rememberMe === true) {
@@ -73,17 +73,19 @@ const Form = ({ userName }) => {
         <input type="checkbox" id="remember-me" onChange={handleRememberMe} />
         <label htmlFor="remember-me">Remember me</label>
       </div>
-      {/* <Link to="/profile" className="sign-in-button" type='submit'>Sign In</Link>        
-    <Link to="/"  className="sign-in-button">Sign Out</Link> */}
       <button className="sign-in-button" type="submit">
         Sign In
       </button>
-      {isLoading && (
+      {isError && (
         <>
           <div className="error">Unexistant user....</div>
         </>
       )}
-      {/* <button className="sign-in-button">Sign Out</button >              */}
+      {isLoading && (
+        <>
+          <LoadingSpinner />
+        </>
+      )}
     </form>
   )
 }

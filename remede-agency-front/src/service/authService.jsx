@@ -16,16 +16,22 @@ import axios from 'axios'
 //     }
 // }
 
-//Si les données sont OK, le backend renvoie un token
+//Envoi du mail et du password
 export const authLogin = async ({ email, password }) => {
   return await axios
     .post('http://localhost:3001/api/v1/user/login', { email, password })
     .then((res) => {
-      //renvoi la réponse du serveur
+      //renvoi la réponse du serveur avec le token
       console.log('res.data', res.data)
       console.log('email et password ds authService', email, password)
       return res.data
     })
-    .catch((error) => console.log(error))
-  // .catch(() => console.log('Ne correspond pas aux datas...'))
+
+    .catch((error) => {
+      if (error.message === 'Network Error') {
+        return console.log('pas de connexion possible, serveur ko')
+      } else {
+        return error
+      }
+    })
 }

@@ -44,11 +44,13 @@ export const authSlice = createSlice({
             state.isLoading = false
             state.token = action.payload.body.token
             state.isSuccess = true
+            state.isError = false
         },
         [login.rejected]: (state, action) => {
             state.isLoading = false
             state.isError = action.payload
         },
+
     },
 })
 
