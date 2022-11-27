@@ -1,4 +1,5 @@
 import axios from 'axios'
+import history from '../customRoutes/history'
 
 // export const login = async () => {
 //     try{
@@ -12,7 +13,6 @@ import axios from 'axios'
 //     }catch (erreur) {
 //         console.log(erreur)
 //         return erreur;
-
 //     }
 // }
 
@@ -29,6 +29,7 @@ export const authLogin = async ({ email, password }) => {
 
     .catch((error) => {
       if (error.message === 'Network Error') {
+        history.push('/*')
         return console.log('pas de connexion possible, serveur ko')
       } else {
         return error

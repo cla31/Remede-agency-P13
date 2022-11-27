@@ -1,13 +1,17 @@
 import React from 'react'
 import '../style/pages/pageError.css'
 import { Link } from 'react-router-dom'
+import notFound from '../assets/notFound.svg'
 
 const PageError = () => {
   return (
     <div>
       <div className="message-erreur">
-        <h5>404</h5>
-        <span>Oups! La page que vous demandez n'existe pas.</span>
+        <img src={notFound} alt="" />
+        <span>
+          Oups! La page que vous demandez n'existe pas ou le serveur est
+          indisponible.
+        </span>
         <Link to="/" className="message">
           Retourner sur la page d'accueil
         </Link>
