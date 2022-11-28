@@ -1,6 +1,12 @@
 import React from 'react'
-import '../style/pages/user.css'
 import Transaction from '../components/transaction'
+import { useDispatch, useSelector } from 'react-redux'
+import { user } from '../middleware/middleware'
+import { useEffect } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { logout } from '../feature/authSlice'
+import EditUser from '../components/EditUser'
+import { removeToken } from '../utils/handleToken'
 
 const datasTransaction = [
   {
@@ -20,17 +26,35 @@ const datasTransaction = [
   },
 ]
 const User = () => {
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+
+  //Récupération du token, prénom et nom dans le store
+  const { token, firstName, lastName } = useSelector((state) => state.auth)
+
+  useEffect(() => {
+    try {
+      if (!firstName && !lastName) {
+        if (token) {
+          //dispatch de la fonction user() du middleware
+          dispatch(user())
+          navigate('/profile')
+        } else {
+          dispatch(logout())
+          navigate('/login')
+          removeToken()
+        }
+      }
+    } catch (error) {
+      console.log('error message ds la page de profil', error.message)
+      navigate('/*')
+    }
+  }, [firstName, lastName, dispatch, navigate, token])
+
   return (
     <div>
       <main className="main bg-dark">
-        <div className="header">
-          <h1>
-            Welcome back
-            <br />
-            Tony Jarvis!
-          </h1>
-          <button className="edit-button">Edit Name</button>
-        </div>
+        <EditUser firsN={firstName} lastN={lastName} />
         <h2 className="sr-only">Accounts</h2>
         {datasTransaction.map((item, index) => (
           <Transaction

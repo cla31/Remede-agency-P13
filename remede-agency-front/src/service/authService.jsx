@@ -36,3 +36,35 @@ export const authLogin = async ({ email, password }) => {
       }
     })
 }
+//Les données de User
+export const userProfile = async (profileData) => {
+  return await axios
+    .post('http://localhost:3001/api/v1/user/profile', profileData)
+    .then((res) => {
+      //retourne les infos du user nom, prenom, mail...
+      //console.log(res.data.body)
+      return res.data.body
+    })
+    .catch((error) => {
+      console.log('error ds user profile', error)
+      return error
+    })
+}
+
+//Mise à jour du profile
+export const updateUserData = async (newData, token) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  }
+  return await axios
+    .put('http://localhost:3001/api/v1/user/profile', newData, config)
+    .then((res) => {
+      return res.data.body
+    })
+    .catch((error) => {
+      console.log('update user data', error)
+      return error
+    })
+}

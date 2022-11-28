@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { login } from '../middleware/middleware'
+import { login, user, updateData } from '../middleware/middleware'
 import { getToken, removeToken } from '../utils/handleToken'
 
 //initialisation du token
@@ -50,7 +50,35 @@ export const authSlice = createSlice({
             state.isLoading = false
             state.isError = action.payload
         },
-
+        [user.pending]: (state) => {
+            state.isLoading = true
+        },
+        [user.fulfilled]: (state, { payload }) => {
+            state.isLoading = false
+            state.isSuccess = true
+            state.isError = null
+            state.firstName = payload.firstName;
+            state.lastName = payload.lastName;
+        },
+        [user.rejected]: (state) => {
+            state.isLoading = false
+        },
+        [updateData.pending]: (state) => {
+            state.isLoading = true
+            state.firstName = ''
+            state.lastName = ''
+        },
+        [updateData.fulfilled]: (state, { payload }) => {
+            state.isLoading = false
+            state.isSuccess = true
+            state.firstName = payload.firstName;
+            state.lastName = payload.lastName;
+            state.isError = null
+        },
+        [updateData.rejected]: (state, { payload }) => {
+            state.isLoading = false
+            state.isError = payload
+        }
     },
 })
 

@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
-import { authLogin } from '../service/authService'
-import { setToken } from '../utils/handleToken'
+import { authLogin, userProfile, updateUserData } from '../service/AuthService'
+import { setToken, getToken, removeToken } from '../utils/handleToken'
 
 
 // Request  l'API
@@ -22,5 +22,37 @@ export const login = createAsyncThunk('auth/login', async({ email, password }, {
             error.toString()
         console.log("message", message)
         return rejectWithValue({ message })
+    }
+})
+
+//Profile de l'utilisateur: ici, on demande au backEnd de récupérer les infos de User, et
+//pour cela on ajoute le token à la requête.
+export const user = createAsyncThunk('auth/userProfile', async(profileData, { rejectWithValue }) => {
+    try {
+        const token = getToken()
+        userProfile.defaults.headers.Autorization = `Bearer ${token}`
+        return await userProfile(profileData, token)
+    } catch (error) {
+        const message =
+            (error.response && error.response.data && error.response.data.message) ||
+            error.message ||
+            error.toString()
+        removeToken()
+        return rejectWithValue(message)
+    }
+})
+
+//Mise à jour des données de l'utilisateur
+export const updateData = createAsyncThunk('auth/updateUserData', async(newData, thunkAPI) => {
+    try {
+        const token = thunkAPI.getState().auth.token;
+        return await updateUserData(newData, token)
+    } catch (error) {
+        const message =
+            (error.response && error.response.data && error.response.data.message) ||
+            error.message ||
+            error.toString()
+        removeToken()
+        return thunkAPI.rejectWithValue(message)
     }
 })
