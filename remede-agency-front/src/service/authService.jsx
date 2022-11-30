@@ -35,9 +35,14 @@ export const authLogin = async ({ email, password }) => {
     })
 }
 //Les données de User
-export const userProfile = async (profileData) => {
+export const userProfile = async (profileData, token) => {
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  }
   return await axios
-    .post('http://localhost:3001/api/v1/user/profile', profileData)
+    .post('http://localhost:3001/api/v1/user/profile', profileData, config)
     .then((res) => {
       //retourne les infos du user nom, prenom, mail...
       //console.log(res.data.body)

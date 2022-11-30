@@ -52,10 +52,6 @@ const Form = ({ userName }) => {
     dispatch(login(datas))
   }
 
-  // if (rememberMe === true) {
-  //   setToken(token)
-  // }
-
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="input-wrapper">

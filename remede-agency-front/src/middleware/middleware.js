@@ -30,7 +30,6 @@ export const login = createAsyncThunk('auth/login', async({ email, password }, {
 export const user = createAsyncThunk('auth/userProfile', async(profileData, { rejectWithValue }) => {
     try {
         const token = getToken()
-        userProfile.defaults.headers.Autorization = `Bearer ${token}`
         return await userProfile(profileData, token)
     } catch (error) {
         const message =

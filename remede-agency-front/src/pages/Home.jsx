@@ -5,6 +5,13 @@ import iconMoney from '../assets/icon-money.png'
 import iconSecurity from '../assets/icon-security.png'
 import Banner from '../components/Banner'
 import FeatureItem from '../components/FeatureItem'
+import { useDispatch, useSelector } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+import { user } from '../middleware/middleware'
+import { useEffect } from 'react'
+import { getToken } from '../utils/handleToken'
+import { logout } from '../feature/authSlice'
+import { removeToken } from '../utils/handleToken'
 
 const datasFeature = [
   {
@@ -32,8 +39,37 @@ const datasFeature = [
 ]
 
 const Home = () => {
-  // useEffect(() => {}, [])
-  // useEffect(() => {}, [])
+  const token = getToken() ? getToken() : null
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
+  const { firstName, lastName } = useSelector((state) => state.auth)
+
+  // useEffect(() => {
+  //   if (token) {
+  //     //dispatch de la fonction user() du middleware
+  //     dispatch(user())
+  //   }
+  // }, [dispatch, navigate, token])
+
+  // useEffect(() => {
+  //   if (firstName && lastName) {
+  //     navigate('/profile')
+  //   }
+  // }, [firstName, lastName, navigate])
+
+  useEffect(() => {
+    if (firstName && lastName) {
+      if (token) {
+        //dispatch de la fonction user() du middleware
+        dispatch(user())
+        navigate('/profile')
+      } else {
+        dispatch(logout())
+        navigate('/login')
+        removeToken()
+      }
+    }
+  }, [dispatch, firstName, lastName, navigate, token])
   return (
     <div>
       <main>

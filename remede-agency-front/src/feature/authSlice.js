@@ -1,10 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { login, user, updateData } from '../middleware/middleware'
-import { getToken, removeToken } from '../utils/handleToken'
+import { removeToken } from '../utils/handleToken'
 
-//initialisation du token
-const checkToken = getToken() ? getToken() : null
-    // console.log(checkToken)
 
 
 const initialState = {
@@ -12,7 +9,7 @@ const initialState = {
     isNetworkError: "No",
     isSuccess: false,
     isLoading: false,
-    checkToken,
+    token: null,
     firstName: '',
     lastName: '',
     rememberMe: false,

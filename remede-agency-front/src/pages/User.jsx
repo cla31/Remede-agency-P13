@@ -32,24 +32,33 @@ const User = () => {
   //Récupération du token, prénom et nom dans le store
   const { token, firstName, lastName } = useSelector((state) => state.auth)
 
+  // useEffect(() => {
+  //   if (token) {
+  //     //dispatch de la fonction user() du middleware
+  //     dispatch(user())
+  //     // navigate('/profile')
+  //   }
+  // }, [dispatch, navigate, token])
+
+  // useEffect(() => {
+  //   if (firstName && lastName) {
+  //     navigate('/profile')
+  //   }
+  // }, [firstName, lastName, navigate])
+
   useEffect(() => {
-    try {
-      if (!firstName && !lastName) {
-        if (token) {
-          //dispatch de la fonction user() du middleware
-          dispatch(user())
-          navigate('/profile')
-        } else {
-          dispatch(logout())
-          navigate('/login')
-          removeToken()
-        }
+    if (firstName && lastName) {
+      if (token) {
+        //dispatch de la fonction user() du middleware
+        dispatch(user())
+        navigate('/profile')
+      } else {
+        dispatch(logout())
+        navigate('/login')
+        removeToken()
       }
-    } catch (error) {
-      console.log('error message ds la page de profil', error.message)
-      navigate('/*')
     }
-  }, [firstName, lastName, dispatch, navigate, token])
+  }, [dispatch, firstName, lastName, navigate, token])
 
   return (
     <div>
