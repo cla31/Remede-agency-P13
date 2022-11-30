@@ -20,7 +20,7 @@ export const login = createAsyncThunk('auth/login', async({ email, password }, {
             (error.response && error.response.data && error.response.data.message) ||
             error.message ||
             error.toString()
-        console.log("message", message)
+        console.log("message ds le catch de middleware", message)
         return rejectWithValue({ message })
     }
 })

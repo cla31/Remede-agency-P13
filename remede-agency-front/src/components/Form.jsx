@@ -21,18 +21,27 @@ const Form = ({ userName }) => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
-  const { isLoading, isSuccess, rememberMe, token, isError } = useSelector(
-    (state) => state.auth
-  )
+  const { isLoading, isSuccess, rememberMe, token, isError, isNetworkError } =
+    useSelector((state) => state.auth)
+
   useEffect(() => {
-    try {
-      if (isSuccess) {
-        navigate('/profile')
-      }
-    } catch (error) {
-      navigate('/*')
+    if (isSuccess) {
+      navigate('/profile')
     }
   }, [isSuccess, navigate])
+
+  useEffect(() => {
+    if (isNetworkError === 'Yes') {
+      navigate('/*')
+    }
+  }, [isNetworkError, navigate])
+
+  //*********TRAVAIL SUR LE REMEMBER ME */
+  useEffect(() => {
+    if (rememberMe === true) {
+      setToken(token)
+    }
+  }, [rememberMe, token])
 
   const handleRememberMe = (e) => {
     dispatch(isRememberMe(e.target.checked))
@@ -43,9 +52,9 @@ const Form = ({ userName }) => {
     dispatch(login(datas))
   }
 
-  if (rememberMe === true) {
-    setToken(token)
-  }
+  // if (rememberMe === true) {
+  //   setToken(token)
+  // }
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>

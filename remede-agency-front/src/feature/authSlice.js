@@ -4,11 +4,12 @@ import { getToken, removeToken } from '../utils/handleToken'
 
 //initialisation du token
 const checkToken = getToken() ? getToken() : null
-    //console.log(token)
+    // console.log(checkToken)
 
 
 const initialState = {
     isError: null,
+    isNetworkError: "No",
     isSuccess: false,
     isLoading: false,
     checkToken,
@@ -27,6 +28,7 @@ export const authSlice = createSlice({
             state.isLoading = false
             state.token = null
             state.isError = null
+            state.isNetworkError = null
             state.isSuccess = false
             state.rememberMe = false
         },
@@ -49,16 +51,21 @@ export const authSlice = createSlice({
         [login.rejected]: (state, action) => {
             state.isLoading = false
             state.isError = action.payload
+            if (
+                state.isError.message === 'Network Error'
+            ) {
+                state.isNetworkError = 'Yes'
+            }
         },
         [user.pending]: (state) => {
             state.isLoading = true
         },
-        [user.fulfilled]: (state, { payload }) => {
+        [user.fulfilled]: (state, action) => {
             state.isLoading = false
             state.isSuccess = true
             state.isError = null
-            state.firstName = payload.firstName;
-            state.lastName = payload.lastName;
+            state.firstName = action.payload.firstName;
+            state.lastName = action.payload.lastName;
         },
         [user.rejected]: (state) => {
             state.isLoading = false
@@ -68,16 +75,16 @@ export const authSlice = createSlice({
             state.firstName = ''
             state.lastName = ''
         },
-        [updateData.fulfilled]: (state, { payload }) => {
+        [updateData.fulfilled]: (state, action) => {
             state.isLoading = false
             state.isSuccess = true
-            state.firstName = payload.firstName;
-            state.lastName = payload.lastName;
+            state.firstName = action.payload.firstName;
+            state.lastName = action.payload.lastName;
             state.isError = null
         },
-        [updateData.rejected]: (state, { payload }) => {
+        [updateData.rejected]: (state, action) => {
             state.isLoading = false
-            state.isError = payload
+            state.isError = action.payload
         }
     },
 })

@@ -1,5 +1,4 @@
-// import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
-import { Routes, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom'
 import Home from './pages/Home'
 import SignIn from './pages/SignIn'
 import User from './pages/User'
@@ -7,13 +6,11 @@ import PageError from './pages/PageError'
 import Header from './components/Header'
 import Footer from './components/Footer'
 import PrivateRoute from './pages/PrivateRoute'
-import CustomRouter from './customRoutes/customRoutes'
-import history from './customRoutes/history'
 import './style/App.css'
 
 const App = () => {
   return (
-    <CustomRouter history={history}>
+    <Router>
       <Header />
       <Routes>
         <Route path="/" element={<Home />} />
@@ -24,7 +21,7 @@ const App = () => {
         <Route path="*" element={<PageError />} />
       </Routes>
       <Footer />
-    </CustomRouter>
+    </Router>
   )
 }
 

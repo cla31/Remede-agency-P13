@@ -8,7 +8,7 @@ const EditUser = ({ firsN, lastN }) => {
   const dispatch = useDispatch()
   const { firstName, lastName } = useSelector((state) => state.auth)
 
-  //Formulaire ou pas? (pour editForm=> bouttons cancel, et edit)
+  //Formulaire ou pas? (pour editForm=> boutons cancel, et edit)
   const [updateUserName, setUpdateUserName] = useState(false)
   const [editBackForm, setEditBackForm] = useState(false)
   //fonction pour afficher le formulaire ou l'annuler, on set setUpdateUserName et setEditBackForm

@@ -32,6 +32,8 @@ const datasFeature = [
 ]
 
 const Home = () => {
+  // useEffect(() => {}, [])
+  // useEffect(() => {}, [])
   return (
     <div>
       <main>
