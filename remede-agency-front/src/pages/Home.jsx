@@ -42,7 +42,7 @@ const Home = () => {
   const token = getToken() ? getToken() : null
   const dispatch = useDispatch()
   const navigate = useNavigate()
-  const { firstName, lastName } = useSelector((state) => state.auth)
+  const { firstName, lastName, rememberMe } = useSelector((state) => state.auth)
 
   // useEffect(() => {
   //   if (token) {
@@ -56,9 +56,9 @@ const Home = () => {
   //     navigate('/profile')
   //   }
   // }, [firstName, lastName, navigate])
-
+  console.log('fname ds home', firstName)
   useEffect(() => {
-    if (firstName && lastName) {
+    if (firstName && lastName && rememberMe) {
       if (token) {
         //dispatch de la fonction user() du middleware
         dispatch(user())
@@ -69,7 +69,7 @@ const Home = () => {
         removeToken()
       }
     }
-  }, [dispatch, firstName, lastName, navigate, token])
+  }, [dispatch, firstName, lastName, navigate, rememberMe, token])
   return (
     <div>
       <main>

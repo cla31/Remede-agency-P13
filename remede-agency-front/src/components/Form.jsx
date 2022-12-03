@@ -40,6 +40,9 @@ const Form = ({ userName }) => {
   useEffect(() => {
     if (rememberMe === true) {
       setToken(token)
+      //non, il ne les connait pas encore
+      // setFirstName(firstName)
+      // setLastName(lastName)
     }
   }, [rememberMe, token])
 

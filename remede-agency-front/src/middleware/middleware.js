@@ -30,6 +30,7 @@ export const login = createAsyncThunk('auth/login', async({ email, password }, {
 export const user = createAsyncThunk('auth/userProfile', async(profileData, { rejectWithValue }) => {
     try {
         const token = getToken()
+        console.log("user profile ds middleware", await userProfile(profileData, token))
         return await userProfile(profileData, token)
     } catch (error) {
         const message =

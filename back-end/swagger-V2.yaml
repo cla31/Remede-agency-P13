@@ -117,7 +117,7 @@ paths:
 
 
 
-  /user/transaction:
+  /user/transactions:
       get:
         security:
           - Bearer: []

@@ -45,7 +45,7 @@ export const userProfile = async (profileData, token) => {
     .post('http://localhost:3001/api/v1/user/profile', profileData, config)
     .then((res) => {
       //retourne les infos du user nom, prenom, mail...
-      //console.log(res.data.body)
+      console.log('les datas ds authService', res.data.body)
       return res.data.body
     })
     .catch((error) => {

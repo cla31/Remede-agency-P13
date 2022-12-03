@@ -32,33 +32,41 @@ const User = () => {
   //Récupération du token, prénom et nom dans le store
   const { token, firstName, lastName } = useSelector((state) => state.auth)
 
-  // useEffect(() => {
-  //   if (token) {
-  //     //dispatch de la fonction user() du middleware
-  //     dispatch(user())
-  //     // navigate('/profile')
-  //   }
-  // }, [dispatch, navigate, token])
-
-  // useEffect(() => {
-  //   if (firstName && lastName) {
-  //     navigate('/profile')
-  //   }
-  // }, [firstName, lastName, navigate])
+  // De séparer les 2 use effect me permet de mettre à jour
+  // firstName et lastName par défaut et donc de base, arriver sur la page de Tony Stark
+  useEffect(() => {
+    if (token) {
+      //dispatch de la fonction user() du middleware
+      dispatch(user())
+      // navigate('/profile')
+    } else {
+      dispatch(logout())
+      navigate('/login')
+      removeToken()
+    }
+  }, [dispatch, navigate, token])
 
   useEffect(() => {
     if (firstName && lastName) {
-      if (token) {
-        //dispatch de la fonction user() du middleware
-        dispatch(user())
-        navigate('/profile')
-      } else {
-        dispatch(logout())
-        navigate('/login')
-        removeToken()
-      }
+      navigate('/profile')
     }
-  }, [dispatch, firstName, lastName, navigate, token])
+  }, [firstName, lastName, navigate])
+
+  //Ci-dessous je n'arrive pas par défaut sur la page de Tony, je dois éditer firstN
+  // et LastN pour avoir un nom et prénom...
+  // useEffect(() => {
+  //   if (firstName && lastName) {
+  //     if (token) {
+  //       //dispatch de la fonction user() du middleware
+  //       dispatch(user())
+  //       navigate('/profile')
+  //     } else {
+  //       dispatch(logout())
+  //       navigate('/login')
+  //       removeToken()
+  //     }
+  //   }
+  // }, [dispatch, firstName, lastName, navigate, token])
 
   return (
     <div>
