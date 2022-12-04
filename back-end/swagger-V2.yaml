@@ -123,7 +123,7 @@ paths:
           - Bearer: []
         tags:
           - Transactions Module
-        summary: API Get transaction of the current month
+        summary: API Get transactions of the current month
         description: Fetch all the transactions of the current month
         parameters:
           - in: header
@@ -148,6 +148,7 @@ paths:
             description: Invalid Fields
           '500':
             description: Internal Server Error
+  /user/transaction:
       post:
         security:
         - Bearer: []
@@ -276,6 +277,7 @@ paths:
           description: Transaction not found
         '500':
           description: Internal Server Error
+
 
     
     
