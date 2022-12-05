@@ -41,16 +41,23 @@ const User = () => {
       // navigate('/profile')
     } else {
       dispatch(logout())
-      navigate('/login')
       removeToken()
+      navigate('/login')
     }
   }, [dispatch, navigate, token])
+  //seance 5/12
+  // useEffect(() => {
+  //   if (token !== null) {
+  //     console.log('token', token)
+  //     dispatch(setToken(token))
+  //   }
+  // }, [])
 
-  useEffect(() => {
-    if (firstName && lastName) {
-      navigate('/profile')
-    }
-  }, [firstName, lastName, navigate])
+  // useEffect(() => {
+  //   if (firstName && lastName) {
+  //     navigate('/profile')
+  //   }
+  // }, [firstName, lastName, navigate])
 
   //Ci-dessous je n'arrive pas par défaut sur la page de Tony, je dois éditer firstN
   // et LastN pour avoir un nom et prénom...

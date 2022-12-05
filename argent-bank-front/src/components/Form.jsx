@@ -31,7 +31,7 @@ const Form = ({ userName }) => {
   }, [isSuccess, navigate])
 
   useEffect(() => {
-    if (isNetworkError === 'Yes') {
+    if (isNetworkError) {
       navigate('/*')
     }
   }, [isNetworkError, navigate])

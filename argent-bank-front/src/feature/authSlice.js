@@ -6,7 +6,7 @@ import { removeToken } from '../utils/handleToken'
 
 const initialState = {
     isError: null,
-    isNetworkError: "No",
+    isNetworkError: false,
     isSuccess: false,
     isLoading: false,
     token: null,
@@ -33,6 +33,13 @@ export const authSlice = createSlice({
         isRememberMe: (state, action) => {
             state.rememberMe = action.payload
         },
+        setToken: (state, action) => {
+            console.log('token action payload', action.payload)
+            console.log('token action', action)
+
+            state.token = action.payload
+
+        }
     },
     extraReducers: {
         [login.pending]: (state) => {
@@ -51,7 +58,7 @@ export const authSlice = createSlice({
             if (
                 state.isError.message === 'Network Error'
             ) {
-                state.isNetworkError = 'Yes'
+                state.isNetworkError = true
             }
         },
         [user.pending]: (state) => {
@@ -87,5 +94,5 @@ export const authSlice = createSlice({
 })
 
 
-export const { logout, isRememberMe } = authSlice.actions
+export const { logout, isRememberMe, setToken } = authSlice.actions
 export default authSlice.reducer

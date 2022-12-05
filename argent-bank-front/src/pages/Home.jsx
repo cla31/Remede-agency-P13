@@ -12,6 +12,7 @@ import { useEffect } from 'react'
 import { getToken } from '../utils/handleToken'
 import { logout } from '../feature/authSlice'
 import { removeToken } from '../utils/handleToken'
+import { setToken } from '../feature/authSlice'
 
 const datasFeature = [
   {
@@ -56,20 +57,29 @@ const Home = () => {
   //     navigate('/profile')
   //   }
   // }, [firstName, lastName, navigate])
-  console.log('fname ds home', firstName)
-  useEffect(() => {
-    if (firstName && lastName && rememberMe) {
-      if (token) {
-        //dispatch de la fonction user() du middleware
-        dispatch(user())
-        navigate('/profile')
-      } else {
-        dispatch(logout())
-        navigate('/login')
-        removeToken()
-      }
-    }
-  }, [dispatch, firstName, lastName, navigate, rememberMe, token])
+
+  //5/12
+  // useEffect(() => {
+  //   if (token !== null) {
+  //     console.log('token', token)
+  //     dispatch(setToken(token))
+  //   }
+  // }, [])
+
+  // console.log('fname ds home', firstName)
+  // useEffect(() => {
+  //   if (firstName && lastName && rememberMe) {
+  //     if (token) {
+  //       //dispatch de la fonction user() du middleware
+  //       dispatch(user())
+  //       navigate('/profile')
+  //     } else {
+  //       dispatch(logout())
+  //       navigate('/login')
+  //       removeToken()
+  //     }
+  //   }
+  // }, [dispatch, firstName, lastName, navigate, rememberMe, token])
   return (
     <div>
       <main>

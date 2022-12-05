@@ -4,10 +4,26 @@ import { useSelector, useDispatch } from 'react-redux'
 import { logout } from '../feature/authSlice'
 import Logo from '../assets/argentBankLogo.png'
 import '../style/components/header.css'
+import { useEffect } from 'react'
+import { setToken } from '../feature/authSlice'
+import { getToken } from '../utils/handleToken'
 
 const Header = () => {
   const dispatch = useDispatch()
-  const { token, firstName } = useSelector((state) => state.auth)
+  const token = getToken() ? getToken() : null
+  const { firstName, rememberMe } = useSelector((state) => state.auth)
+  // useEffect(() => {
+  //   if (rememberMe && token !== null) {
+  //     dispatch()
+  //   }
+  // }, [dispatch, rememberMe, token])
+
+  useEffect(() => {
+    if (token !== null) {
+      console.log('token', token)
+      dispatch(setToken(token))
+    }
+  }, [])
 
   const onLogout = () => {
     dispatch(logout())
