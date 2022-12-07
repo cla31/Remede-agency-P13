@@ -4,26 +4,27 @@ import { useSelector, useDispatch } from 'react-redux'
 import { logout } from '../feature/authSlice'
 import Logo from '../assets/argentBankLogo.png'
 import '../style/components/header.css'
-import { useEffect } from 'react'
-import { setToken } from '../feature/authSlice'
-import { getToken } from '../utils/handleToken'
+// import { useEffect } from 'react'
+// import { setTokenStore } from '../feature/authSlice'
+// import { getTokenLocalStorage } from '../utils/handleToken'
+// import { user } from '../middleware/middleware'
 
 const Header = () => {
-  const dispatch = useDispatch()
-  const token = getToken() ? getToken() : null
-  const { firstName, rememberMe } = useSelector((state) => state.auth)
-  // useEffect(() => {
-  //   if (rememberMe && token !== null) {
-  //     dispatch()
-  //   }
-  // }, [dispatch, rememberMe, token])
+  // const tokenLocalStorage = getTokenLocalStorage()
+  //   ? getTokenLocalStorage()
+  //   : null
 
-  useEffect(() => {
-    if (token !== null) {
-      console.log('token', token)
-      dispatch(setToken(token))
-    }
-  }, [])
+  const dispatch = useDispatch()
+  const { firstName, token } = useSelector((state) => state.auth)
+
+  // // 5/12
+  // useEffect(() => {
+  //   if (tokenLocalStorage !== null) {
+  //     console.log('token dans le header', tokenLocalStorage)
+  //     dispatch(setTokenStore(tokenLocalStorage))
+  //     // dispatch(user())
+  //   }
+  // }, [dispatch, tokenLocalStorage])
 
   const onLogout = () => {
     dispatch(logout())

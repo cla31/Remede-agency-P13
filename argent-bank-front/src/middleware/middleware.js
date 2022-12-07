@@ -1,18 +1,18 @@
 import { createAsyncThunk } from '@reduxjs/toolkit'
 import { authLogin, userProfile, updateUserData } from '../service/AuthService'
-import { setToken, getToken, removeToken } from '../utils/handleToken'
+import { removeTokenLocalStorage } from '../utils/handleToken'
 
 
 // Request  l'API
 //Avec le login, on demande au backend de faire l'authentification. 
 export const login = createAsyncThunk('auth/login', async({ email, password }, { rejectWithValue }) => {
     try {
-        console.log("email et password ds middleware", email, password)
-            //On demande au backend de faire l'authentification
+
+        // console.log("email et password ds middleware", email, password)
+        //On demande au backend de faire l'authentification
         const response = await authLogin({ email, password })
-        console.log("response ds le middleware", response)
-        console.log("response de rejected value", rejectWithValue())
-        setToken(response.body.token)
+            // console.log("response ds le middleware", response)
+            // console.log("response de rejected value", rejectWithValue())
         return response
 
     } catch (error) {
@@ -27,17 +27,20 @@ export const login = createAsyncThunk('auth/login', async({ email, password }, {
 
 //Profile de l'utilisateur: ici, on demande au backEnd de récupérer les infos de User, et
 //pour cela on ajoute le token à la requête.
-export const user = createAsyncThunk('auth/userProfile', async(profileData, { rejectWithValue }) => {
+export const user = createAsyncThunk('auth/userProfile', async(profileData, { getState, rejectWithValue }) => {
     try {
-        const token = getToken()
-        console.log("user profile ds middleware", await userProfile(profileData, token))
+        //Récupération du token dans le state
+        const token = getState().auth.token
+            // console.log(" state token", getState().auth.token)
+
+        // console.log("user profile ds middleware", await userProfile(profileData, token))
         return await userProfile(profileData, token)
     } catch (error) {
         const message =
             (error.response && error.response.data && error.response.data.message) ||
             error.message ||
             error.toString()
-        removeToken()
+        removeTokenLocalStorage()
         return rejectWithValue(message)
     }
 })
@@ -46,13 +49,14 @@ export const user = createAsyncThunk('auth/userProfile', async(profileData, { re
 export const updateData = createAsyncThunk('auth/updateUserData', async(newData, thunkAPI) => {
     try {
         const token = thunkAPI.getState().auth.token;
+        console.log("token ds updateData", token)
         return await updateUserData(newData, token)
     } catch (error) {
         const message =
             (error.response && error.response.data && error.response.data.message) ||
             error.message ||
             error.toString()
-        removeToken()
+        removeTokenLocalStorage()
         return thunkAPI.rejectWithValue(message)
     }
 })

@@ -1,11 +1,11 @@
-export const getToken = () => {
+export const getTokenLocalStorage = () => {
     return localStorage.getItem('token')
 }
 
-export const removeToken = () => {
+export const removeTokenLocalStorage = () => {
     return localStorage.removeItem('token')
 }
 
-export const setToken = (val) => {
+export const setTokenLocalStorage = (val) => {
     localStorage.setItem('token', val)
 }

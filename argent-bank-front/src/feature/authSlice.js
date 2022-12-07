@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { login, user, updateData } from '../middleware/middleware'
-import { removeToken } from '../utils/handleToken'
+import { removeTokenLocalStorage } from '../utils/handleToken'
 
 
 
@@ -20,7 +20,7 @@ export const authSlice = createSlice({
     initialState,
     reducers: {
         logout: (state) => {
-            removeToken()
+            removeTokenLocalStorage()
             localStorage.clear()
             state.isLoading = false
             state.token = null
@@ -33,13 +33,13 @@ export const authSlice = createSlice({
         isRememberMe: (state, action) => {
             state.rememberMe = action.payload
         },
-        setToken: (state, action) => {
+        setTokenStore: (state, action) => {
             console.log('token action payload', action.payload)
             console.log('token action', action)
 
             state.token = action.payload
 
-        }
+        },
     },
     extraReducers: {
         [login.pending]: (state) => {
@@ -94,5 +94,5 @@ export const authSlice = createSlice({
 })
 
 
-export const { logout, isRememberMe, setToken } = authSlice.actions
+export const { logout, isRememberMe, setTokenStore } = authSlice.actions
 export default authSlice.reducer

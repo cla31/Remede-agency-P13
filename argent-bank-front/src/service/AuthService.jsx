@@ -21,16 +21,17 @@ export const authLogin = async ({ email, password }) => {
     .post('http://localhost:3001/api/v1/user/login', { email, password })
     .then((res) => {
       //renvoi la réponse du serveur avec le token
-      console.log('res.data', res.data)
-      console.log('email et password ds authService', email, password)
+      // console.log('res.data', res.data)
+      // console.log('email et password ds authService', email, password)
       return res.data
     })
     .catch((error) => {
       if (error.message === 'Network Error') {
-        console.log('pas de connexion possible, serveur ko', error.message)
+        // console.log('pas de connexion possible, serveur ko', error.message)
         throw error.message
       } else {
-        return error
+        console.log('error ds authLogin', error)
+        throw error
       }
     })
 }
@@ -45,11 +46,11 @@ export const userProfile = async (profileData, token) => {
     .post('http://localhost:3001/api/v1/user/profile', profileData, config)
     .then((res) => {
       //retourne les infos du user nom, prenom, mail...
-      console.log('les datas ds authService', res.data.body)
+      // console.log('les datas ds authService', res.data.body)
       return res.data.body
     })
     .catch((error) => {
-      console.log('error ds user profile', error)
+      // console.log('error ds user profile', error)
       return error
     })
 }

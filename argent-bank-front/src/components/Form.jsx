@@ -3,46 +3,29 @@ import { useForm } from 'react-hook-form'
 import { isRememberMe } from '../feature/authSlice'
 import { login } from '../middleware/middleware'
 import { useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { setToken } from '../utils/handleToken'
+import { setTokenLocalStorage } from '../utils/handleToken'
 import LoadingSpinner from './LoadingSpinner'
 import '../style/components/form.css'
 
 // Validation du formulaire cf:
 // https://react-hook-form.com/get-started/
 
-const Form = ({ userName }) => {
+const Form = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm()
-  const navigate = useNavigate()
   const dispatch = useDispatch()
 
-  const { isLoading, isSuccess, rememberMe, token, isError, isNetworkError } =
-    useSelector((state) => state.auth)
-
-  useEffect(() => {
-    if (isSuccess) {
-      navigate('/profile')
-    }
-  }, [isSuccess, navigate])
-
-  useEffect(() => {
-    if (isNetworkError) {
-      navigate('/*')
-    }
-  }, [isNetworkError, navigate])
-
+  const { isLoading, rememberMe, token, isError } = useSelector(
+    (state) => state.auth
+  )
   //*********TRAVAIL SUR LE REMEMBER ME */
   useEffect(() => {
     if (rememberMe === true) {
-      setToken(token)
-      //non, il ne les connait pas encore
-      // setFirstName(firstName)
-      // setLastName(lastName)
+      setTokenLocalStorage(token)
     }
   }, [rememberMe, token])
 
@@ -51,14 +34,14 @@ const Form = ({ userName }) => {
   }
 
   const onSubmit = (datas, e) => {
-    console.log('datas dans le Form', datas)
+    // console.log('datas dans le Form', datas)
     dispatch(login(datas))
   }
 
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className="input-wrapper">
-        <label htmlFor="email">{userName}</label>
+        <label htmlFor="email"></label>
         <input
           type="email"
           id="username"

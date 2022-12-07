@@ -5,14 +5,11 @@ import iconMoney from '../assets/icon-money.png'
 import iconSecurity from '../assets/icon-security.png'
 import Banner from '../components/Banner'
 import FeatureItem from '../components/FeatureItem'
-import { useDispatch, useSelector } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
+import { useDispatch } from 'react-redux'
 import { user } from '../middleware/middleware'
 import { useEffect } from 'react'
-import { getToken } from '../utils/handleToken'
-import { logout } from '../feature/authSlice'
-import { removeToken } from '../utils/handleToken'
-import { setToken } from '../feature/authSlice'
+import { getTokenLocalStorage } from '../utils/handleToken'
+import { setTokenStore } from '../feature/authSlice'
 
 const datasFeature = [
   {
@@ -40,46 +37,20 @@ const datasFeature = [
 ]
 
 const Home = () => {
-  const token = getToken() ? getToken() : null
   const dispatch = useDispatch()
-  const navigate = useNavigate()
-  const { firstName, lastName, rememberMe } = useSelector((state) => state.auth)
-
-  // useEffect(() => {
-  //   if (token) {
-  //     //dispatch de la fonction user() du middleware
-  //     dispatch(user())
-  //   }
-  // }, [dispatch, navigate, token])
-
-  // useEffect(() => {
-  //   if (firstName && lastName) {
-  //     navigate('/profile')
-  //   }
-  // }, [firstName, lastName, navigate])
+  const tokenLocalStorage = getTokenLocalStorage()
+    ? getTokenLocalStorage()
+    : null
 
   //5/12
-  // useEffect(() => {
-  //   if (token !== null) {
-  //     console.log('token', token)
-  //     dispatch(setToken(token))
-  //   }
-  // }, [])
+  useEffect(() => {
+    if (tokenLocalStorage !== null) {
+      console.log('token dans le form', tokenLocalStorage)
+      dispatch(setTokenStore(tokenLocalStorage))
+      dispatch(user())
+    }
+  }, [])
 
-  // console.log('fname ds home', firstName)
-  // useEffect(() => {
-  //   if (firstName && lastName && rememberMe) {
-  //     if (token) {
-  //       //dispatch de la fonction user() du middleware
-  //       dispatch(user())
-  //       navigate('/profile')
-  //     } else {
-  //       dispatch(logout())
-  //       navigate('/login')
-  //       removeToken()
-  //     }
-  //   }
-  // }, [dispatch, firstName, lastName, navigate, rememberMe, token])
   return (
     <div>
       <main>
