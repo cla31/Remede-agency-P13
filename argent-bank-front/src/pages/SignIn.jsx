@@ -3,15 +3,18 @@ import '../style/pages/signIn.css'
 import Form from '../components/Form'
 import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { user } from '../middleware/middleware'
 import { logout } from '../feature/authSlice'
-import { setToken } from '../feature/authSlice'
+import { getTokenLocalStorage } from '../utils/handleToken'
+import { setTokenStore } from '../feature/authSlice'
+import { setTokenLocalStorage } from '../utils/handleToken'
 
 const SignIn = () => {
   const { isSuccess, isNetworkError } = useSelector((state) => state.auth)
-  // const tokenLocalStorage = localStorage.getItem('token')
-  // const [tokenLs, setTokenLs] = useState(tokenLocalStorage)
+  const tokenLocalStorage = getTokenLocalStorage()
+    ? getTokenLocalStorage()
+    : null
   const navigate = useNavigate()
   const dispatch = useDispatch()
   useEffect(() => {
@@ -23,15 +26,20 @@ const SignIn = () => {
     }
   }, [dispatch, isSuccess, navigate])
 
-  // useEffect(() => {
-  //   dispatch(setToken(setTokenLs(tokenLs)))
-  // }, [])
-
   useEffect(() => {
     if (isNetworkError) {
       navigate('/*')
     }
   }, [isNetworkError, navigate])
+
+  //5/12
+  useEffect(() => {
+    if (tokenLocalStorage !== null) {
+      console.log('token dans le SignIn', tokenLocalStorage)
+      dispatch(setTokenStore(tokenLocalStorage))
+      dispatch(user())
+    }
+  }, [])
 
   return (
     <div>

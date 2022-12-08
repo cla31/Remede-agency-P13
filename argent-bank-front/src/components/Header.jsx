@@ -17,18 +17,18 @@ const Header = () => {
   const dispatch = useDispatch()
   const { firstName, token } = useSelector((state) => state.auth)
 
-  // // 5/12
-  // useEffect(() => {
-  //   if (tokenLocalStorage !== null) {
-  //     console.log('token dans le header', tokenLocalStorage)
-  //     dispatch(setTokenStore(tokenLocalStorage))
-  //     // dispatch(user())
-  //   }
-  // }, [dispatch, tokenLocalStorage])
-
   const onLogout = () => {
     dispatch(logout())
   }
+  // 5/12
+  // useEffect(() => {
+  //   console.log('tooooken local storage', tokenLocalStorage)
+  //   if (tokenLocalStorage !== null) {
+  //     console.log('token dans le header', tokenLocalStorage)
+  //     dispatch(setTokenStore(tokenLocalStorage))
+  //     dispatch(user())
+  //   }
+  // }, [])
 
   return (
     <nav className="main-nav">
