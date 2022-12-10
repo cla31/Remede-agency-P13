@@ -117,14 +117,14 @@ paths:
 
 
 
-  /{account}/transactions:
+  /{account}/{id}/transactions:
       get:
         security:
           - Bearer: []
         tags:
           - Transactions Module
-        summary: API Get transactions of the current month
-        description: Fetch all the transactions of the current month
+        summary: Returns transactions for the current month
+        description: Fetch all the transactions of a user's account for the current month
         parameters:
           - in: header
             name: Authorization
@@ -144,18 +144,49 @@ paths:
             description: Get transactions Successfully
             schema:
               $ref: '#/definitions/ResponseAllTransactions'
-          '400':
-            description: Invalid Fields
+          '404':
+            description: Transactions not found
           '500':
             description: Internal Server Error
-  /{account}/transaction:
-      post:
+  
+
+  /transactions/{transactionId}:
+    get:
+      security:
+        - Bearer: []
+      tags:
+        - Transactions Module
+      summary: Return one transaction
+      description: Return one user transaction user's account
+      parameters:
+        - in: path
+          name: "itemId"
+          description: itemId transaction
+          type: string
+          required: true
+        - in: header
+          name: Authorization
+          description: Attach Bearer JWT token
+          type: string
+          required: true
+      produces:
+        - application/json
+      responses:
+        '200':
+          description: Get transactions Successfully
+          schema: 
+            $ref: '#/definitions/ResponseTransaction'
+        '404':
+          description: Transaction not found
+        '500':
+          description: Internal Server Error
+    post:
         security:
         - Bearer: []
         tags:
           - Transactions Module
-        summary: New Transaction
-        description: API to add new transaction
+        summary: New Transaction user's account
+        description: Adding a new transaction to a user's account
         parameters:
           - in: header
             name: Authorization
@@ -179,47 +210,14 @@ paths:
             description: Invalid Fields
           '500':
             description: Internal Server Error
-
-
-  /{account}/transactions/{transactionId}:
-    get:
-      security:
-        - Bearer: []
-      tags:
-        - Transactions Module
-      summary: transaction by id
-      description: transaction details
-      parameters:
-        - in: path
-          name: "itemId"
-          description: itemId transaction
-          type: string
-          required: true
-        - in: header
-          name: Authorization
-          description: Attach Bearer JWT token
-          type: string
-          required: true
-      produces:
-        - application/json
-      responses:
-        '200':
-          description: Get transactions Successfully
-          schema: 
-            $ref: '#/definitions/ResponseTransaction'
-        '404':
-          description: Transaction not found
-        '405':
-          description: User is not authorized
-        '500':
-          description: Internal Server Error
+    
     put:
       security:
         - Bearer: []
       tags:
         - Transactions Module
-      summary: Update Transaction
-      description: Update transaction
+      summary: Update Transaction detail.
+      description: Update transaction detail user's account
       parameters:
         - in: path
           name: "itemId"
@@ -245,10 +243,6 @@ paths:
             $ref: '#/definitions/ResponseTransaction'
         '400':
           description: Invalid Fields
-        '404':
-          description: Transaction not found
-        '405':
-          description: User is not authorized
         '500':
           description: Internal Server Error
     delete:
@@ -256,8 +250,8 @@ paths:
         - Bearer: []
       tags:
         - Transactions Module
-      summary: Delete Transaction
-      description: API Delete transaction
+      summary: Delete Transaction detail
+      description: Delete transaction detail user's account
       parameters:
         - in: path
           name: "itemId"
