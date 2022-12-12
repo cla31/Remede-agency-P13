@@ -211,7 +211,7 @@ paths:
           '500':
             description: Internal Server Error
     
-    put:
+    patch:
       security:
         - Bearer: []
       tags:
@@ -250,8 +250,8 @@ paths:
         - Bearer: []
       tags:
         - Transactions Module
-      summary: Delete Transaction detail
-      description: Delete transaction detail user's account
+      summary: Delete Transaction
+      description: Delete transaction user's account
       parameters:
         - in: path
           name: "itemId"
