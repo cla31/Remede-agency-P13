@@ -2,11 +2,6 @@ import React from 'react'
 import Transaction from '../components/transaction'
 import { useSelector } from 'react-redux'
 import EditUser from '../components/EditUser'
-import { useEffect } from 'react'
-import { getTokenLocalStorage } from '../utils/handleToken'
-import { user } from '../middleware/middleware'
-import { useDispatch } from 'react-redux'
-import { setTokenStore } from '../feature/authSlice'
 
 const datasTransaction = [
   {
@@ -28,18 +23,6 @@ const datasTransaction = [
 const User = () => {
   //Récupération prénom et nom dans le store
   const { firstName, lastName } = useSelector((state) => state.auth)
-  const tokenLocalStorage = getTokenLocalStorage()
-    ? getTokenLocalStorage()
-    : null
-  const dispatch = useDispatch()
-  useEffect(() => {
-    if (tokenLocalStorage !== null) {
-      console.log('token dans le user', tokenLocalStorage)
-      dispatch(setTokenStore(tokenLocalStorage))
-      dispatch(user())
-    }
-  }, [])
-
   return (
     <div>
       <main className="main bg-dark">

@@ -4,32 +4,14 @@ import { useSelector, useDispatch } from 'react-redux'
 import { logout } from '../feature/authSlice'
 import Logo from '../assets/argentBankLogo.png'
 import '../style/components/header.css'
-// import { useEffect } from 'react'
-// import { setTokenStore } from '../feature/authSlice'
-// import { getTokenLocalStorage } from '../utils/handleToken'
-// import { user } from '../middleware/middleware'
 
 const Header = () => {
-  // const tokenLocalStorage = getTokenLocalStorage()
-  //   ? getTokenLocalStorage()
-  //   : null
-
   const dispatch = useDispatch()
   const { firstName, token } = useSelector((state) => state.auth)
 
   const onLogout = () => {
     dispatch(logout())
   }
-  // 5/12
-  // useEffect(() => {
-  //   console.log('tooooken local storage', tokenLocalStorage)
-  //   if (tokenLocalStorage !== null) {
-  //     console.log('token dans le header', tokenLocalStorage)
-  //     dispatch(setTokenStore(tokenLocalStorage))
-  //     dispatch(user())
-  //   }
-  // }, [])
-
   return (
     <nav className="main-nav">
       <Link to="/" className="main-nav-logo">

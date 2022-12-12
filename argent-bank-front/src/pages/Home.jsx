@@ -42,10 +42,9 @@ const Home = () => {
     ? getTokenLocalStorage()
     : null
 
-  //5/12
   useEffect(() => {
     if (tokenLocalStorage !== null) {
-      console.log('token dans le form', tokenLocalStorage)
+      // console.log('token dans le home', tokenLocalStorage)
       dispatch(setTokenStore(tokenLocalStorage))
       dispatch(user())
     }

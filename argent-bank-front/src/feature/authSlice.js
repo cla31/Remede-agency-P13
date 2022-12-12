@@ -34,8 +34,8 @@ export const authSlice = createSlice({
             state.rememberMe = action.payload
         },
         setTokenStore: (state, action) => {
-            console.log('token action payload', action.payload)
-            console.log('token action', action)
+            // console.log('token action payload', action.payload)
+            // console.log('token action', action)
 
             state.token = action.payload
 
