@@ -8,7 +8,6 @@ import { user } from '../middleware/middleware'
 import { logout } from '../feature/authSlice'
 import { getTokenLocalStorage } from '../utils/handleToken'
 import { setTokenStore } from '../feature/authSlice'
-import { setTokenLocalStorage } from '../utils/handleToken'
 
 const SignIn = () => {
   const { isSuccess, isNetworkError } = useSelector((state) => state.auth)
@@ -21,8 +20,6 @@ const SignIn = () => {
     if (isSuccess) {
       dispatch(user())
       navigate('/profil')
-    } else {
-      dispatch(logout())
     }
   }, [dispatch, isSuccess, navigate])
 
