@@ -1,5 +1,6 @@
 import React from 'react'
 import '../style/components/featureItem.css'
+import PropTypes from 'prop-types'
 
 const FeatureItem = ({ source, alt, title, paragraph }) => {
   return (
@@ -11,3 +12,11 @@ const FeatureItem = ({ source, alt, title, paragraph }) => {
   )
 }
 export default FeatureItem
+
+//Proptypes
+FeatureItem.propTypes = {
+  source: PropTypes.string.isRequired,
+  alt: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  paragraph: PropTypes.string.isRequired,
+}

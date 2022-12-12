@@ -1,5 +1,6 @@
 import React from 'react'
 import '../style/components/transaction.css'
+import PropTypes from 'prop-types'
 
 function Transaction({ title, amount, description }) {
   return (
@@ -17,3 +18,10 @@ function Transaction({ title, amount, description }) {
 }
 
 export default Transaction
+
+//Proptypes
+Transaction.propTypes = {
+  title: PropTypes.string.isRequired,
+  amount: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
+}

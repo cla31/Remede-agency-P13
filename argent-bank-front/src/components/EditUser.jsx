@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { updateData } from '../middleware/middleware'
 import '../style/components/editUser.css'
+import PropTypes from 'prop-types'
 
 const EditUser = ({ firsN, lastN }) => {
   const dispatch = useDispatch()
@@ -91,3 +92,9 @@ const EditUser = ({ firsN, lastN }) => {
 }
 
 export default EditUser
+
+//Proptypes
+EditUser.propTypes = {
+  firstN: PropTypes.string,
+  lastN: PropTypes.string,
+}
