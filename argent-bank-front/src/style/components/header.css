@@ -18,6 +18,12 @@
 .main-nav-item {
     text-decoration: none;
     margin-right: 0.5rem;
+    /* border: 2px red solid; */
+}
+
+.fa-user-circle {
+    /* border: 2px red solid; */
+    margin-right: 3px;
 }
 
 .main-nav-item:hover {
