@@ -35,7 +35,11 @@ const datasFeature = [
       ' We use top of the line encryption to make sure your data and money is always safe.',
   },
 ]
-
+/**
+ * Display the Home page with Banner and datas feature in FeatureItem's component.
+ * @component
+ * @returns {JSX.Element} Home component
+ */
 const Home = () => {
   const dispatch = useDispatch()
   const tokenLocalStorage = getTokenLocalStorage()

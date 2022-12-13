@@ -4,8 +4,15 @@ import { useDispatch, useSelector } from 'react-redux'
 import { updateData } from '../middleware/middleware'
 import '../style/components/editUser.css'
 import PropTypes from 'prop-types'
+/**
+ * Creation of the EditUser component to access and edit form to update name and lastname.
+ * @component
+ * @param {string} firstN
+ * @param {string} lastN
+ * @returns {JSX.Element} EditUser component
+ */
 
-const EditUser = ({ firsN, lastN }) => {
+const EditUser = ({ firstN, lastN }) => {
   const dispatch = useDispatch()
   const { firstName, lastName } = useSelector((state) => state.auth)
 
@@ -29,13 +36,13 @@ const EditUser = ({ firsN, lastN }) => {
   const save = (e) => {
     e.preventDefault()
     const userUpdateData = {
-      test: console.log('Les données firstName', firstName),
+      // test: console.log('Les données firstName', firstName),
       firstName: updateFirstName ? updateFirstName : firstName,
       lastName: updateLastName ? updateLastName : lastName,
     }
     //maj des données ds le store cf fonction ci-dessus
     dispatch(updateData(userUpdateData))
-    console.log('Les données mises à jour', userUpdateData)
+    // console.log('Les données mises à jour', userUpdateData)
     //affiche les nouveaux nom et prénom
     setUpdateUserName(!updateUserName)
     setEditBackForm(!editBackForm)
@@ -81,7 +88,7 @@ const EditUser = ({ firsN, lastN }) => {
         </form>
       ) : (
         <div>
-          <h2>{firsN + ' ' + lastN}</h2>
+          <h2>{firstN + ' ' + lastN}</h2>
           <button className="edit-button" onClick={editForm}>
             Edit Name
           </button>
@@ -95,6 +102,6 @@ export default EditUser
 
 //Proptypes
 EditUser.propTypes = {
-  firstN: PropTypes.string,
+  firsN: PropTypes.string,
   lastN: PropTypes.string,
 }

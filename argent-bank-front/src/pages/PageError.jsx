@@ -3,6 +3,12 @@ import '../style/pages/pageError.css'
 import { Link } from 'react-router-dom'
 import notFound from '../assets/notFound.svg'
 
+/**
+ * Creation of error page with link back to home page
+ * @component
+ * @returns {JSX.Element} PageError component
+ */
+
 const PageError = () => {
   return (
     <div>

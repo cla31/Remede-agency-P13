@@ -5,6 +5,12 @@ import { logout } from '../feature/authSlice'
 import Logo from '../assets/argentBankLogo.png'
 import '../style/components/header.css'
 
+/**
+ * Creation of the header with navigation barre
+ * @component
+ * @returns {JSX.Element} Header component
+ */
+
 const Header = () => {
   const dispatch = useDispatch()
   const { firstName, token } = useSelector((state) => state.auth)

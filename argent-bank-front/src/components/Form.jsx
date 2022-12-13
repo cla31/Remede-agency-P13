@@ -11,6 +11,12 @@ import '../style/components/form.css'
 // Validation du formulaire cf:
 // https://react-hook-form.com/get-started/
 
+/**
+ * Creation of the login form for the signIn page
+ * @component
+ * @returns {JSX.Element} Form component
+ */
+
 const Form = () => {
   const {
     register,

@@ -6,6 +6,11 @@ import reportWebVitals from './reportWebVitals'
 import store from './app/store'
 import { Provider } from 'react-redux'
 
+/**
+ * @file root folder of the application.
+ * @see <a href="https://github.com/cla31/Remede-agency-P13" target="_blank"> repo Git </a>
+ */
+
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
   <React.StrictMode>

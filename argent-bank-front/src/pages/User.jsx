@@ -20,13 +20,19 @@ const datasTransaction = [
     description: 'Current Balance',
   },
 ]
+/**
+ * Display the profile page with account transactions and access to edit form to update name and lastname.
+ * @component
+ * @returns {JSX.Element} User component
+ */
+
 const User = () => {
   //Récupération prénom et nom dans le store
   const { firstName, lastName } = useSelector((state) => state.auth)
   return (
     <div>
       <main className="main bg-dark">
-        <EditUser firsN={firstName} lastN={lastName} />
+        <EditUser firstN={firstName} lastN={lastName} />
         <h2 className="sr-only">Accounts</h2>
         {datasTransaction.map((item, index) => (
           <Transaction

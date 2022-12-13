@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: components/EditUser.jsx</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: components/EditUser.jsx</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import React from 'react'
+import { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import { updateData } from '../middleware/middleware'
+import '../style/components/editUser.css'
+import PropTypes from 'prop-types'
+/**
+ * Creation of the EditUser component to access and edit form to update name and lastname.
+ * @component
+ * @param {string} firsN
+ * @param {string} lastN
+ * @returns {JSX.Element} EditUser component
+ */
+
+const EditUser = ({ firsN, lastN }) => {
+  const dispatch = useDispatch()
+  const { firstName, lastName } = useSelector((state) => state.auth)
+
+  //Formulaire ou pas? (pour editForm=> boutons cancel, et edit)
+  const [updateUserName, setUpdateUserName] = useState(false)
+  const [editBackForm, setEditBackForm] = useState(false)
+  //fonction pour afficher le formulaire ou l'annuler, on set setUpdateUserName et setEditBackForm
+  // si updateUserName et editBackForm sont différent de true ou false, selon l'état
+  const editForm = (e) => {
+    e.preventDefault()
+    setUpdateUserName(!updateUserName)
+    setEditBackForm(!editBackForm)
+  }
+
+  //pour mettre à jour les noms et prénoms (fonction onSave)
+  // les setUpdateFirstName et setUpdateLastName sont maj via e.target.value
+  const [updateFirstName, setUpdateFirstName] = useState('')
+  const [updateLastName, setUpdateLastName] = useState('')
+  //fonction pour sauvegarder les données
+  //si updateFirstName est true, soit données de updateFirstName maj ds le store sinon firstname de l'état initial
+  const save = (e) => {
+    e.preventDefault()
+    const userUpdateData = {
+      test: console.log('Les données firstName', firstName),
+      firstName: updateFirstName ? updateFirstName : firstName,
+      lastName: updateLastName ? updateLastName : lastName,
+    }
+    //maj des données ds le store cf fonction ci-dessus
+    dispatch(updateData(userUpdateData))
+    console.log('Les données mises à jour', userUpdateData)
+    //affiche les nouveaux nom et prénom
+    setUpdateUserName(!updateUserName)
+    setEditBackForm(!editBackForm)
+  }
+  //Return
+  return (
+    &lt;div className="header">
+      &lt;h1 className={editBackForm ? 'black-title' : 'white-title'}>
+        Welcome back
+      &lt;/h1>
+      {/* Si les données sont mises à jour */}
+      {updateUserName ? (
+        &lt;form className="user-form">
+          &lt;div className="input-wrapper">
+            &lt;label htmlFor="first-name">&lt;/label>
+            &lt;input
+              type="text"
+              id="first-name"
+              name="first-name"
+              placeholder={firstName}
+              required
+              onChange={(e) => setUpdateFirstName(e.target.value)}
+            />
+            &lt;label htmlFor="last-name">&lt;/label>
+            &lt;input
+              type="text"
+              id="last-name"
+              name="last-name"
+              placeholder={lastName}
+              required
+              onChange={(e) => setUpdateLastName(e.target.value)}
+            />
+          &lt;/div>
+
+          &lt;div className="user-buttons">
+            &lt;button className="btn" type="submit" onClick={save}>
+              Save
+            &lt;/button>
+            &lt;button className="btn" type="submit" onClick={editForm}>
+              Cancel
+            &lt;/button>
+          &lt;/div>
+        &lt;/form>
+      ) : (
+        &lt;div>
+          &lt;h2>{firsN + ' ' + lastN}&lt;/h2>
+          &lt;button className="edit-button" onClick={editForm}>
+            Edit Name
+          &lt;/button>
+        &lt;/div>
+      )}
+    &lt;/div>
+  )
+}
+
+export default EditUser
+
+//Proptypes
+EditUser.propTypes = {
+  firsN: PropTypes.string,
+  lastN: PropTypes.string,
+}
+</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#API">API</a></li><li><a href="global.html#App">App</a></li><li><a href="global.html#Banner">Banner</a></li><li><a href="global.html#EditUser">EditUser</a></li><li><a href="global.html#FeatureItem">FeatureItem</a></li><li><a href="global.html#Footer">Footer</a></li><li><a href="global.html#Form">Form</a></li><li><a href="global.html#Header">Header</a></li><li><a href="global.html#Home">Home</a></li><li><a href="global.html#LoadingSpinner">LoadingSpinner</a></li><li><a href="global.html#Middleware">Middleware</a></li><li><a href="global.html#PageError">PageError</a></li><li><a href="global.html#PrivateRoute">PrivateRoute</a></li><li><a href="global.html#SignIn">SignIn</a></li><li><a href="global.html#Slice">Slice</a></li><li><a href="global.html#Store">Store</a></li><li><a href="global.html#Transaction">Transaction</a></li><li><a href="global.html#User">User</a></li><li><a href="global.html#handleToken">handleToken</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.0</a> on Tue Dec 13 2022 12:31:23 GMT+0100 (heure normale d’Europe centrale)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

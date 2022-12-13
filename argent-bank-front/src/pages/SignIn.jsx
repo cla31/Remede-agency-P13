@@ -5,7 +5,11 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { useEffect } from 'react'
 import { user } from '../middleware/middleware'
-
+/**
+ * Display the login page with form to connect to the profile page.
+ * @component
+ * @returns {JSX.Element} SignIn component
+ */
 const SignIn = () => {
   const { isSuccess, isNetworkError } = useSelector((state) => state.auth)
 

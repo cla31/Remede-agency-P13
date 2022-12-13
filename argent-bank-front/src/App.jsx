@@ -8,6 +8,11 @@ import Footer from './components/Footer'
 import PrivateRoute from './pages/PrivateRoute'
 import './style/App.css'
 
+/**
+ * Creation of pages routes including a private route.
+ * @returns {JSX.Element} App component
+ */
+
 const App = () => {
   return (
     <Router>

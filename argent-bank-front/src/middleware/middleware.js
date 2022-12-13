@@ -2,6 +2,10 @@ import { createAsyncThunk } from '@reduxjs/toolkit'
 import { authLogin, userProfile, updateUserData } from '../service/AuthService'
 import { removeTokenLocalStorage } from '../utils/handleToken'
 
+/**
+ * @name Middleware
+ * @description Functions positioned between the dispatch action and the interaction that will have been made on the UI
+ */
 
 // Request  l'API
 //Avec le login, on demande au backend de faire l'authentification. 
@@ -49,7 +53,7 @@ export const user = createAsyncThunk('auth/userProfile', async(profileData, { ge
 export const updateData = createAsyncThunk('auth/updateUserData', async(newData, thunkAPI) => {
     try {
         const token = thunkAPI.getState().auth.token;
-        console.log("token ds updateData", token)
+        // console.log("token ds updateData", token)
         return await updateUserData(newData, token)
     } catch (error) {
         const message =

@@ -1,6 +1,12 @@
 import React from 'react'
 import '../style/components/banner.css'
 
+/**
+ * Creation of the home banner with image and desciption
+ * @component
+ * @returns {JSX.Element} Banner component
+ */
+
 function Banner() {
   return (
     <div className="hero">

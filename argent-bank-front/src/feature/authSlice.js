@@ -2,7 +2,10 @@ import { createSlice } from '@reduxjs/toolkit'
 import { login, user, updateData } from '../middleware/middleware'
 import { removeTokenLocalStorage } from '../utils/handleToken'
 
-
+/**
+ * @name Slice
+ * @description Configuration createSlice with reducers and extraReducers to listen to dispatched actions and use promise lifecycle to know what it's going on.
+ */
 
 const initialState = {
     isError: null,

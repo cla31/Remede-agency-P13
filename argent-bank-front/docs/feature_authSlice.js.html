@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: feature/authSlice.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: feature/authSlice.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>import { createSlice } from '@reduxjs/toolkit'
+import { login, user, updateData } from '../middleware/middleware'
+import { removeTokenLocalStorage } from '../utils/handleToken'
+
+/**
+ * @name Slice
+ * @description Configuration createSlice with reducers and extraReducers to listen to dispatched actions and use promise lifecycle to know what it's going on.
+ */
+
+const initialState = {
+    isError: null,
+    isNetworkError: false,
+    isSuccess: false,
+    isLoading: false,
+    token: null,
+    firstName: '',
+    lastName: '',
+    rememberMe: false,
+}
+
+export const authSlice = createSlice({
+    name: 'auth',
+    initialState,
+    reducers: {
+        logout: (state) => {
+            removeTokenLocalStorage()
+            localStorage.clear()
+            state.isLoading = false
+            state.token = null
+            state.isError = null
+            state.isNetworkError = null
+            state.isSuccess = false
+            state.rememberMe = false
+        },
+
+        isRememberMe: (state, action) => {
+            state.rememberMe = action.payload
+        },
+        setTokenStore: (state, action) => {
+            // console.log('token action payload', action.payload)
+            // console.log('token action', action)
+
+            state.token = action.payload
+
+        },
+    },
+    extraReducers: {
+        [login.pending]: (state) => {
+            state.isLoading = true
+            state.isError = null
+        },
+        [login.fulfilled]: (state, action) => {
+            state.isLoading = false
+            state.token = action.payload.body.token
+            state.isSuccess = true
+            state.isError = false
+        },
+        [login.rejected]: (state, action) => {
+            state.isLoading = false
+            state.isError = action.payload
+            if (
+                state.isError.message === 'Network Error'
+            ) {
+                state.isNetworkError = true
+            }
+        },
+        [user.pending]: (state) => {
+            state.isLoading = true
+        },
+        [user.fulfilled]: (state, action) => {
+            state.isLoading = false
+            state.isSuccess = true
+            state.isError = null
+            state.firstName = action.payload.firstName;
+            state.lastName = action.payload.lastName;
+        },
+        [user.rejected]: (state) => {
+            state.isLoading = false
+        },
+        [updateData.pending]: (state) => {
+            state.isLoading = true
+            state.firstName = ''
+            state.lastName = ''
+        },
+        [updateData.fulfilled]: (state, action) => {
+            state.isLoading = false
+            state.isSuccess = true
+            state.firstName = action.payload.firstName;
+            state.lastName = action.payload.lastName;
+            state.isError = null
+        },
+        [updateData.rejected]: (state, action) => {
+            state.isLoading = false
+            state.isError = action.payload
+        }
+    },
+})
+
+
+export const { logout, isRememberMe, setTokenStore } = authSlice.actions
+export default authSlice.reducer</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Global</h3><ul><li><a href="global.html#API">API</a></li><li><a href="global.html#App">App</a></li><li><a href="global.html#Banner">Banner</a></li><li><a href="global.html#EditUser">EditUser</a></li><li><a href="global.html#FeatureItem">FeatureItem</a></li><li><a href="global.html#Footer">Footer</a></li><li><a href="global.html#Form">Form</a></li><li><a href="global.html#Header">Header</a></li><li><a href="global.html#Home">Home</a></li><li><a href="global.html#LoadingSpinner">LoadingSpinner</a></li><li><a href="global.html#Middleware">Middleware</a></li><li><a href="global.html#PageError">PageError</a></li><li><a href="global.html#PrivateRoute">PrivateRoute</a></li><li><a href="global.html#SignIn">SignIn</a></li><li><a href="global.html#Slice">Slice</a></li><li><a href="global.html#Store">Store</a></li><li><a href="global.html#Transaction">Transaction</a></li><li><a href="global.html#User">User</a></li><li><a href="global.html#handleToken">handleToken</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 4.0.0</a> on Tue Dec 13 2022 12:31:23 GMT+0100 (heure normale d’Europe centrale)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>

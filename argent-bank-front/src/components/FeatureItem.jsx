@@ -2,6 +2,15 @@ import React from 'react'
 import '../style/components/featureItem.css'
 import PropTypes from 'prop-types'
 
+/**
+ * Creation of a feature item for the profile page
+ * @component
+ * @param {string} source
+ * @param {string} alt
+ * @param {string} title
+ * @param {string} paragraph
+ * @returns {JSX.Element} FeatureItem component
+ */
 const FeatureItem = ({ source, alt, title, paragraph }) => {
   return (
     <div className="feature-item">

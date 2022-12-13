@@ -15,6 +15,11 @@ import axios from 'axios'
 //     }
 // }
 
+/**
+ * @name API
+ * @description Links with backEnd for API calls.
+ */
+
 //Envoi du mail et du password
 export const authLogin = async ({ email, password }) => {
   return await axios

@@ -7,6 +7,12 @@ import { user } from '../middleware/middleware'
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
 
+/**
+ * Creation of a private route that return to login page if there is no token in the local storage or keep the connection if the token is in the local storage.
+ * @component
+ * @returns {JSX.Element} PrivateRoute component
+ */
+
 const PrivateRoute = () => {
   const { token } = useSelector((state) => state.auth)
   const dispatch = useDispatch()
