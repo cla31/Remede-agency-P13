@@ -28,28 +28,36 @@ const Header = () => {
         />
         <h1 className="sr-only">Argent Bank</h1>
       </Link>
-      <div className="main-nav-item">
-        {token ? (
-          <>
-            <div className="main-nav-item">
-              <i className="fa fa-user-circle"></i>
-              <span>{firstName}</span>
-            </div>
+      <div className="connexion">
+        <div className="main-nav-item">
+          {token ? (
+            <>
+              <div className="main-nav-item">
+                <div className="iconeUser">
+                  <i className="fa fa-user-circle"></i>
+                </div>
+                <div className="LogUser">
+                  <span>{firstName}</span>
+                </div>
+              </div>
+              <div>
+                <Link to="/" className="main-nav-item" onClick={onLogout}>
+                  {/* <i className="fa fa-user-circle"></i> Sign In */}
+                  Sign Out
+                </Link>
+              </div>
+            </>
+          ) : (
             <div>
-              <Link to="/" className="main-nav-item" onClick={onLogout}>
-                {/* <i className="fa fa-user-circle"></i> Sign In */}
-                Sign Out
+              <Link to="/login" className="main-nav-item">
+                <div className="iconeUser">
+                  <i className="fa fa-user-circle"></i>
+                </div>
+                <div className="LogUser">Sign In</div>
               </Link>
             </div>
-          </>
-        ) : (
-          <div>
-            <Link to="/login" className="main-nav-item">
-              <i className="fa fa-user-circle"></i>
-              Sign In
-            </Link>
-          </div>
-        )}
+          )}
+        </div>
       </div>
     </nav>
   )

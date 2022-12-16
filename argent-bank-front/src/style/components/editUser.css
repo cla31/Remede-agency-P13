@@ -1,6 +1,7 @@
 .header {
     color: #fff;
     margin-bottom: 2rem;
+    /* border: 2px solid red; */
 }
 
 .user-form {
@@ -24,6 +25,7 @@
 
 h2 {
     font-size: 2em;
+    /* border: 2px solid red; */
 }
 
 .edit-button {
@@ -53,4 +55,19 @@ h2 {
 
 .white-title {
     color: white;
+    /* border: 2px solid red; */
+}
+
+@media (max-width:768px) {
+    h2 {
+        font-size: 24px;
+        /* border: 2px solid red; */
+    }
+    .white-title {
+        font-size: 24px;
+        margin-top: 20px;
+    }
+    .header {
+        padding-top: 10px;
+    }
 }

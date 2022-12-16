@@ -9,8 +9,17 @@
     margin: 0 auto;
     margin-top: 3rem;
     padding: 2rem;
+    /* border: 2px solid red; */
 }
 
 .sign-in-icon {
     font-size: 5rem;
+}
+
+@media (max-width:768px) {
+    .sign-in-content {
+        width: 280px;
+        /* border: 2px solid red; */
+        height: 500px;
+    }
 }

@@ -18,7 +18,7 @@
 .main-nav-item {
     text-decoration: none;
     margin-right: 0.5rem;
-    /* border: 2px red solid; */
+    /* border: 2px black solid; */
 }
 
 .fa-user-circle {
@@ -38,4 +38,19 @@
 .main-nav-logo-image {
     max-width: 100%;
     width: 200px;
+}
+
+@media (max-width:768px) {
+    .main-nav-item {
+        font-size: 12px;
+        margin-right: 0px;
+        /* border: 2px red solid; */
+    }
+    .connexion {
+        /* border: 2px red solid; */
+        width: 90px;
+    }
+    .main-nav {
+        padding: 10px;
+    }
 }
