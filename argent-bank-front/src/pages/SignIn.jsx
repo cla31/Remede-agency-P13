@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { useEffect } from 'react'
 import { user } from '../middleware/middleware'
+import { getTokenLocalStorage } from '../utils/handleToken'
 /**
  * Display the login page with form to connect to the profile page.
  * @component
@@ -15,12 +16,22 @@ const SignIn = () => {
 
   const navigate = useNavigate()
   const dispatch = useDispatch()
+
+  const tokenLocalStorage = getTokenLocalStorage()
+    ? getTokenLocalStorage()
+    : null
   useEffect(() => {
     if (isSuccess) {
       dispatch(user())
       navigate('/profil')
     }
   }, [dispatch, isSuccess, navigate])
+
+  useEffect(() => {
+    if (tokenLocalStorage !== null) {
+      navigate('/profil')
+    }
+  }, [])
 
   useEffect(() => {
     if (isNetworkError) {

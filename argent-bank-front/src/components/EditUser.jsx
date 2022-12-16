@@ -15,39 +15,26 @@ import PropTypes from 'prop-types'
 const EditUser = ({ firstN, lastN }) => {
   const dispatch = useDispatch()
   const { firstName, lastName } = useSelector((state) => state.auth)
-
-  //Formulaire ou pas? (pour editForm=> boutons cancel, et edit)
   const [updateUserName, setUpdateUserName] = useState(false)
   const [editBackForm, setEditBackForm] = useState(false)
-  //fonction pour afficher le formulaire ou l'annuler, on set setUpdateUserName et setEditBackForm
-  // si updateUserName et editBackForm sont différent de true ou false, selon l'état
   const editForm = (e) => {
     e.preventDefault()
     setUpdateUserName(!updateUserName)
     setEditBackForm(!editBackForm)
   }
-
-  //pour mettre à jour les noms et prénoms (fonction onSave)
-  // les setUpdateFirstName et setUpdateLastName sont maj via e.target.value
   const [updateFirstName, setUpdateFirstName] = useState('')
   const [updateLastName, setUpdateLastName] = useState('')
-  //fonction pour sauvegarder les données
-  //si updateFirstName est true, soit données de updateFirstName maj ds le store sinon firstname de l'état initial
   const save = (e) => {
     e.preventDefault()
     const userUpdateData = {
-      // test: console.log('Les données firstName', firstName),
       firstName: updateFirstName ? updateFirstName : firstName,
       lastName: updateLastName ? updateLastName : lastName,
     }
-    //maj des données ds le store cf fonction ci-dessus
     dispatch(updateData(userUpdateData))
-    // console.log('Les données mises à jour', userUpdateData)
-    //affiche les nouveaux nom et prénom
     setUpdateUserName(!updateUserName)
     setEditBackForm(!editBackForm)
   }
-  //Return
+
   return (
     <div className="header">
       <h1 className={editBackForm ? 'black-title' : 'white-title'}>
