@@ -1,6 +1,8 @@
 # Argent Bank 
 Use an API for a bank user account with React.
 ##
+Project 13 "Remede agency" from React JS Application Developer Training.
+##
 Remede Agency is an agency specialized in the development of web applications.<br/>
 ##
 The project concerns, Argent Bank, a bank. The contract is in two parts which is broken down into several phases:
@@ -9,5 +11,4 @@ The project concerns, Argent Bank, a bank. The contract is in two parts which is
 ##
 ![LOGO](./logo.png)
 ##
-Project 13 "Remede agency" from React JS Application Developer Training.
-##
+
