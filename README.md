@@ -82,21 +82,15 @@ To learn more about how the API works, once you have started your local environm
 ### Home page:
 
 ![DESKTOP-VERSION](./home.jpg)
-<br/>
-<br/>
-Login page:
-<br/>
-<br/>
+
+### Login page:
+
 ![MOBILE-VERSION](./login.png)
-<br/>
-<br/>
-Profil page:
-<br/>
-<br/>
+
+### Profil page:
+
 ![MOBILE-VERSION](./profil.png)
-<br/>
-<br/>
-Datas flow:
-<br/>
-<br/>
+
+### Datas flow:
+
 ![SCHEMA-CODE](./archi.png)
