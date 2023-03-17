@@ -26,6 +26,7 @@ The project concerns, Argent Bank, a bank. The contract is in two parts which is
 - Authenticate to an API
 - Implementation of the "remember me" option which allows to maintain the connection of a user when refreshing the page.
 ##
+No online versions available for the moment, this project is only functional with a local installation of the back.
 ## Installing the back end
 
 ### Prerequisites
