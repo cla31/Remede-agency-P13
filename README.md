@@ -11,4 +11,10 @@ The project concerns, Argent Bank, a bank. The contract is in two parts which is
 ##
 ![LOGO](./logo.png)
 ##
-
+**Skills developed:**
+- Implement a state manager in a react application
+- Interact with an API
+- Model an API
+- Authenticate to an API
+- Implementation of the "remember me" option which allows to maintain the connection of a user when refreshing the page.
+##
