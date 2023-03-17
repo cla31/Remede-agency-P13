@@ -76,3 +76,26 @@ Once you run the `populate-db` script, you should have two users in your databas
 ## API Documentation
 
 To learn more about how the API works, once you have started your local environment, you can visit: http://localhost:3001/api-docs
+**Application overview**:<br/>
+Home page:
+<br/>
+<br/>
+![DESKTOP-VERSION](./home.jpg)
+<br/>
+<br/>
+Login page:
+<br/>
+<br/>
+![MOBILE-VERSION](./login.png)
+<br/>
+<br/>
+Profil page:
+<br/>
+<br/>
+![MOBILE-VERSION](./profil.png)
+<br/>
+<br/>
+Datas flow:
+<br/>
+<br/>
+![SCHEMA-CODE](./archi.png)
