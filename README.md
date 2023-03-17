@@ -6,12 +6,10 @@
 ![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white)
 ![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white)
 ![MAC OS](https://img.shields.io/badge/mac%20os-000000?style=for-the-badge&logo=apple&logoColor=white)
-# Argent Bank 
+# Project 13 "Argent Bank" from React JS Application Developer Training.
 Use an API for a bank user account with React.
 ##
 ![LOGO](./logo.png)
-##
-Project 13 "Remede agency" from React JS Application Developer Training.
 ##
 Remede Agency is an agency specialized in the development of web applications.<br/>
 ##
